@@ -675,7 +675,7 @@ function renderAwarenessTopics(container, lang) {
 
     return `
       <div class="awareness-item" data-id="${topic.id}">
-        <div class="awareness-header">
+        <button type="button" class="awareness-header" aria-expanded="false" aria-controls="awareness-content-${index}">
           <div class="awareness-header-left">
             <span class="topic-index">${index + 1}</span>
             <h3>${escapeHtml(title)}</h3>
@@ -683,8 +683,8 @@ function renderAwarenessTopics(container, lang) {
           <svg class="awareness-toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M6 9l6 6 6-6"/>
           </svg>
-        </div>
-        <div class="awareness-content">
+        </button>
+        <div class="awareness-content" id="awareness-content-${index}" aria-hidden="true">
           <div class="awareness-subbox" style="margin-bottom: 16px;">
             <h4>📌 ${labels.what}</h4>
             <p>${escapeHtml(what)}</p>
@@ -720,12 +720,18 @@ function renderAwarenessTopics(container, lang) {
   const items = container.querySelectorAll('.awareness-item');
   items.forEach(item => {
     const header = item.querySelector('.awareness-header');
+    const content = item.querySelector('.awareness-content');
     header.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
-      // If user wants only one open at a time or toggle
-      items.forEach(i => i.classList.remove('open'));
+      items.forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.awareness-header').setAttribute('aria-expanded', 'false');
+        i.querySelector('.awareness-content').setAttribute('aria-hidden', 'true');
+      });
       if (!isOpen) {
         item.classList.add('open');
+        header.setAttribute('aria-expanded', 'true');
+        content.setAttribute('aria-hidden', 'false');
       }
     });
   });
@@ -733,6 +739,8 @@ function renderAwarenessTopics(container, lang) {
   // Open first by default
   if (items.length > 0) {
     items[0].classList.add('open');
+    items[0].querySelector('.awareness-header').setAttribute('aria-expanded', 'true');
+    items[0].querySelector('.awareness-content').setAttribute('aria-hidden', 'false');
   }
 }
 

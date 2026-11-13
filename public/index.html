@@ -54,7 +54,7 @@
   </nav>
 
   <!-- Mobile Drawer -->
-  <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true">
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true" inert>
     <a href="#home" class="nav-link mobile-drawer-link">Home</a>
     <a href="#message-scanner" class="nav-link mobile-drawer-link">AI Message Scanner</a>
     <a href="#url-scanner" class="nav-link mobile-drawer-link">Phishing URL Scanner</a>
@@ -438,7 +438,7 @@
               </div>
 
               <div class="form-group">
-                <textarea id="message-input" class="form-textarea" placeholder="Paste suspicious SMS or WhatsApp message here... (e.g. 'Dear Customer, your electricity will be disconnected tonight at 9:30 PM...')"></textarea>
+                  <textarea id="message-input" class="form-textarea" aria-label="Suspicious message to analyze" placeholder="Paste suspicious SMS or WhatsApp message here... (e.g. 'Dear Customer, your electricity will be disconnected tonight at 9:30 PM...')"></textarea>
               </div>
 
               <div class="scanner-footer-row">
@@ -529,7 +529,7 @@
               </div>
 
               <div class="form-group">
-                <input type="text" id="url-input" class="form-input" placeholder="Paste the website URL you want to check (e.g. http://sbi-kyc-update-portal.online/login)">
+                <input type="url" id="url-input" class="form-input" aria-label="Website URL to analyze" inputmode="url" autocomplete="url" placeholder="Paste the website URL you want to check (e.g. http://sbi-kyc-update-portal.online/login)">
               </div>
 
               <div class="scanner-footer-row">
@@ -612,20 +612,20 @@
                 <button type="button" class="sample-pill" data-sample-email="safeNewsletter">Genuine Tech Digest Email</button>
               </div>
 
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+              <div class="email-meta-grid">
                 <div class="form-group" style="margin-bottom: 0;">
                   <label class="form-label">Sender Email / Display Name (Optional)</label>
-                  <input type="text" id="email-sender-input" class="form-input" placeholder="e.g. HDFC Support &lt;support@hdfc-netbanking.com&gt;">
+                  <input type="text" id="email-sender-input" class="form-input" aria-label="Email sender" placeholder="e.g. HDFC Support &lt;support@hdfc-netbanking.com&gt;">
                 </div>
                 <div class="form-group" style="margin-bottom: 0;">
                   <label class="form-label">Subject Line (Optional)</label>
-                  <input type="text" id="email-subject-input" class="form-input" placeholder="e.g. URGENT: Account Suspension Notice">
+                  <input type="text" id="email-subject-input" class="form-input" aria-label="Email subject" placeholder="e.g. URGENT: Account Suspension Notice">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="form-label">Email Body Content</label>
-                <textarea id="email-body-input" class="form-textarea" placeholder="Paste the full email text here..."></textarea>
+                <textarea id="email-body-input" class="form-textarea" aria-label="Email body to analyze" placeholder="Paste the full email text here..."></textarea>
               </div>
 
               <div class="scanner-footer-row">
@@ -764,9 +764,9 @@
     </section>
 
     <!-- Scan Details Modal -->
-    <div id="scan-details-modal" style="display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 20px;">
+    <div id="scan-details-modal" role="dialog" aria-modal="true" aria-labelledby="modal-scan-title" style="display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 20px;">
       <div style="background: #FFFFFF; border-radius: 20px; max-width: 650px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 32px; box-shadow: var(--shadow-lg); position: relative;">
-        <button id="close-modal-btn" style="position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-text-secondary);">&times;</button>
+        <button id="close-modal-btn" aria-label="Close scan details" style="position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-text-secondary);">&times;</button>
         <h3 id="modal-scan-title" style="font-size: 1.35rem; color: var(--color-primary); margin-bottom: 8px;">Scan Details</h3>
         <p style="margin-bottom: 16px;"><span class="badge" id="modal-scan-level">HIGH RISK</span> &bull; <span id="modal-scan-category" style="font-weight: 600;">Category</span></p>
 

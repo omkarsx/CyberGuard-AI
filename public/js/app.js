@@ -37,13 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupNavigation() {
   const mobileToggle = document.getElementById('mobile-nav-toggle');
   const mobileDrawer = document.getElementById('mobile-nav-drawer');
-  const navLinks = document.querySelectorAll('.nav-link, .mobile-drawer-link');
+  const navLinks = document.querySelectorAll('.nav-menu .nav-link, .mobile-nav-drawer a');
 
   if (mobileToggle && mobileDrawer) {
     mobileToggle.addEventListener('click', () => {
       const isOpen = mobileDrawer.classList.toggle('open');
       mobileToggle.setAttribute('aria-expanded', isOpen);
       mobileDrawer.setAttribute('aria-hidden', String(!isOpen));
+      mobileDrawer.inert = !isOpen;
+      document.body.classList.toggle('nav-open', isOpen);
     });
   }
 
@@ -58,7 +60,9 @@ function setupNavigation() {
           if (mobileDrawer) {
             mobileDrawer.classList.remove('open');
             mobileDrawer.setAttribute('aria-hidden', 'true');
+            mobileDrawer.inert = true;
             mobileToggle?.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('nav-open');
           }
           const navOffset = 64;
           const elementPosition = target.getBoundingClientRect().top;
@@ -80,10 +84,22 @@ function setupNavigation() {
     if (event.key === 'Escape' && mobileDrawer?.classList.contains('open')) {
       mobileDrawer.classList.remove('open');
       mobileDrawer.setAttribute('aria-hidden', 'true');
+      mobileDrawer.inert = true;
       mobileToggle?.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
       mobileToggle?.focus();
     }
   });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && mobileDrawer?.classList.contains('open')) {
+      mobileDrawer.classList.remove('open');
+      mobileDrawer.setAttribute('aria-hidden', 'true');
+      mobileDrawer.inert = true;
+      mobileToggle?.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
+    }
+  }, { passive: true });
 
   // Scrollspy for active nav link
   const sections = document.querySelectorAll('section[id]');

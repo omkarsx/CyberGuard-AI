@@ -46,10 +46,14 @@ export function initScannerSuite(onScanCompleted) {
 
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      tabBtns.forEach(b => b.classList.remove('active'));
+      tabBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
       tabPanes.forEach(p => p.classList.remove('active'));
 
       btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
       const target = btn.dataset.tab;
       const targetPane = document.getElementById(target);
       if (targetPane) targetPane.classList.add('active');
