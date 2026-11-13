@@ -1,0 +1,20 @@
+{
+  "name": "cyberguard-ai",
+  "version": "1.0.0",
+  "description": "CyberGuard AI - AI-Based Cybercrime Detection and Awareness System developed for JSPM University Pune",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "cybersecurity",
+    "phishing-detector",
+    "ai",
+    "cybercrime-awareness",
+    "jspm-university",
+    "scam-detection"
+  ],
+  "author": "Department of Electronics and Telecommunication Engineering, JSPM University Pune",
+  "license": "MIT"
+}

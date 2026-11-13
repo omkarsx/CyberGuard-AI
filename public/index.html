@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberGuard AI — Detect. Protect. Educate. | JSPM University Pune</title>
+  <meta name="description" content="AI-based Cybercrime Detection and Awareness System developed by Department of Electronics and Telecommunication Engineering, JSPM University Pune.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. STICKY NAVIGATION BAR (APPLE MINIMALIST STYLE)
+       ========================================================================= -->
+  <nav class="navbar" id="site-nav">
+    <div class="nav-container">
+      <a href="#home" class="nav-brand" aria-label="CyberGuard AI Home">
+        <svg class="nav-logo-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm0 2.18l6 2.25v4.66c0 4.1-2.6 7.9-6 8.91-3.4-1.01-6-4.81-6-8.91V6.43l6-2.25zM11 7h2v6h-2V7zm0 8h2v2h-2v-2z"/>
+        </svg>
+        <span>CyberGuard <span style="color: var(--color-secondary);">AI</span></span>
+      </a>
+
+      <ul class="nav-menu" id="nav-menu-list">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#message-scanner" class="nav-link">Message Scanner</a></li>
+        <li><a href="#url-scanner" class="nav-link">URL Scanner</a></li>
+        <li><a href="#email-scanner" class="nav-link">Email Scanner</a></li>
+        <li><a href="#awareness" class="nav-link">Cyber Awareness</a></li>
+        <li><a href="#safety-tips" class="nav-link">Safety Tips</a></li>
+        <li><a href="#quiz" class="nav-link">Cyber Quiz</a></li>
+        <li><a href="#report" class="nav-link">Helpline 1930</a></li>
+        <li><a href="#about" class="nav-link">About Project</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#scanners-suite" class="nav-cta-btn">
+          <span>Scan Now</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation Menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <a href="#home" class="nav-link mobile-drawer-link">Home</a>
+    <a href="#message-scanner" class="nav-link mobile-drawer-link">AI Message Scanner</a>
+    <a href="#url-scanner" class="nav-link mobile-drawer-link">Phishing URL Scanner</a>
+    <a href="#email-scanner" class="nav-link mobile-drawer-link">Email Scam Detector</a>
+    <a href="#awareness" class="nav-link mobile-drawer-link">Cyber Awareness Centre</a>
+    <a href="#safety-tips" class="nav-link mobile-drawer-link">Smart Safety Recommendations</a>
+    <a href="#quiz" class="nav-link mobile-drawer-link">Cybersecurity Quiz</a>
+    <a href="#report" class="nav-link mobile-drawer-link">Report Cybercrime & 1930</a>
+    <a href="#about" class="nav-link mobile-drawer-link">About JSPM Project Team</a>
+    <div style="margin-top: 16px;">
+      <a href="#scanners-suite" class="btn btn-primary" style="width: 100%;">Launch Detection Suite</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- =========================================================================
+         2. HERO SECTION
+         ========================================================================= -->
+    <section class="hero-section" id="home">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-badge-pill">
+              <span class="hero-badge-dot"></span>
+              <span>JSPM University Pune • Innovation Project 2026–27</span>
+            </div>
+
+            <h1 class="hero-title">
+              Your Digital World.<br>
+              Your Security.<br>
+              <span class="gradient-text">Our Intelligence.</span>
+            </h1>
+
+            <p class="hero-subtitle">
+              Meet CyberGuard AI — your intelligent companion for detecting online scams, identifying suspicious messages and building a safer digital future.
+            </p>
+
+            <div class="hero-cta-group">
+              <a href="#scanners-suite" class="btn btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span>Start Scanning</span>
+              </a>
+              <a href="#awareness" class="btn btn-secondary">
+                <span>Explore Cyber Safety</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+
+            <div class="hero-stats-row">
+              <div class="hero-stat-item">
+                <h4>10+</h4>
+                <p>Scam Threat Vectors</p>
+              </div>
+              <div class="hero-stat-item">
+                <h4>1930</h4>
+                <p>National Helpline Ready</p>
+              </div>
+              <div class="hero-stat-item">
+                <h4>100%</h4>
+                <p>Client Privacy Preserved</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Animated Shield Visual -->
+          <div class="hero-visual-wrapper">
+            <div class="shield-container">
+              <div class="shield-radar-ring ring-1"></div>
+              <div class="shield-radar-ring ring-2"></div>
+
+              <!-- Animated Digital Shield SVG -->
+              <svg class="shield-core-svg" viewBox="0 0 200 240" fill="none">
+                <defs>
+                  <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#2563EB" />
+                    <stop offset="50%" stop-color="#1D4ED8" />
+                    <stop offset="100%" stop-color="#071426" />
+                  </linearGradient>
+                  <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.8" />
+                    <stop offset="100%" stop-color="#2563EB" stop-opacity="0.2" />
+                  </linearGradient>
+                </defs>
+                <!-- Shield Base -->
+                <path d="M100 15 L180 50 C180 140, 140 200, 100 225 C60 200, 20 140, 20 50 Z" fill="url(#shieldGrad)" stroke="#38BDF8" stroke-width="3" filter="drop-shadow(0 0 15px rgba(56,189,248,0.4))" />
+                <!-- Inner Shield Inset -->
+                <path d="M100 35 L165 65 C165 135, 132 185, 100 205 C68 185, 35 135, 35 65 Z" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <!-- Circuit & Grid Lines -->
+                <path d="M60 85 L100 85 L100 145 M140 85 L100 85 M100 145 L75 170 M100 145 L125 170" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" />
+                <circle cx="100" cy="85" r="5" fill="#FFFFFF" />
+                <circle cx="60" cy="85" r="4" fill="#38BDF8" />
+                <circle cx="140" cy="85" r="4" fill="#38BDF8" />
+                <circle cx="75" cy="170" r="4" fill="#38BDF8" />
+                <circle cx="125" cy="170" r="4" fill="#38BDF8" />
+                <circle cx="100" cy="120" r="16" fill="url(#glowGrad)" stroke="#FFFFFF" stroke-width="2" />
+                <path d="M94 120 L98 124 L107 115" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+
+              <!-- Floating Apple-style Info Badges -->
+              <div class="floating-chip chip-1">
+                <span>🛡️</span>
+                <span>OTP Shield Active</span>
+              </div>
+              <div class="floating-chip chip-2">
+                <span>⚡</span>
+                <span>Typosquat Intelligence</span>
+              </div>
+              <div class="floating-chip chip-3">
+                <span>🤖</span>
+                <span>AI Heuristics v2.4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         3. SECTION A: WHY CYBERSECURITY MATTERS
+         ========================================================================= -->
+    <section class="section-padding section-bg-light" id="why-matters">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Threat Landscape 2026</span>
+          <h2 class="section-title">Why Cybersecurity Matters Now More Than Ever</h2>
+          <p class="section-desc">
+            As India’s digital economy processes billions of transactions monthly, deceptive social engineering attacks have grown exponentially in speed and sophistication.
+          </p>
+        </div>
+
+        <div class="card-grid-3">
+          <div class="apple-card">
+            <div class="card-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                <line x1="2" y1="10" x2="22" y2="10"/>
+              </svg>
+            </div>
+            <h3>Online Financial Fraud</h3>
+            <p>
+              Exploitation of UPI collect requests, fake refund gateways, and deceptive QR codes designed to debit accounts under the guise of receiving payments.
+            </p>
+            <a href="#awareness" class="card-link">Learn UPI safety &rarr;</a>
+          </div>
+
+          <div class="apple-card">
+            <div class="card-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+              </svg>
+            </div>
+            <h3>Phishing Attacks</h3>
+            <p>
+              Forged lookalike portals cloning State Bank of India, HDFC, and Income Tax Department domains to harvest login credentials and PAN details.
+            </p>
+            <a href="#url-scanner" class="card-link">Scan a suspicious link &rarr;</a>
+          </div>
+
+          <div class="apple-card">
+            <div class="card-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                <line x1="12" y1="18" x2="12.01" y2="18"/>
+              </svg>
+            </div>
+            <h3>OTP & SIM Scams</h3>
+            <p>
+              Aggressive voice calls (vishing), deceptive 5G SIM upgrades, and remote desktop app installations (AnyDesk) used to intercept authentication codes.
+            </p>
+            <a href="#safety-tips" class="card-link">View OTP protection tips &rarr;</a>
+          </div>
+
+          <div class="apple-card">
+            <div class="card-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <h3>Fake Websites</h3>
+            <p>
+              Typosquatted URLs using deceptive extensions (.xyz, .online) that abuse the illusion of HTTPS padlocks to steal credit card information.
+            </p>
+            <a href="#url-scanner" class="card-link">Audit domain legitimacy &rarr;</a>
+          </div>
+
+          <div class="apple-card">
+            <div class="card-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <h3>Identity Theft</h3>
+            <p>
+              Misuse of Aadhaar and PAN documents through predatory unverified loan applications to extract contact lists and extort citizens.
+            </p>
+            <a href="#awareness" class="card-link">Explore Aadhaar masking &rarr;</a>
+          </div>
+
+          <div class="apple-card" style="background: linear-gradient(135deg, #071426 0%, #112240 100%); color: #FFFFFF;">
+            <div class="card-icon-wrapper" style="background: rgba(56, 189, 248, 0.2); color: #38BDF8;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3 style="color: #FFFFFF;">Digital Arrest Threats</h3>
+            <p style="color: #94A3B8;">
+              Extortionists posing as CBI or Mumbai Police on video calls. Remember: Indian law does not recognize "Digital Arrest".
+            </p>
+            <a href="#report" class="card-link" style="color: #38BDF8;">Get emergency 1930 help &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. SECTION B: INTRODUCING CYBERGUARD AI
+         ========================================================================= -->
+    <section class="section-padding" id="introducing">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Enterprise-Grade Protection</span>
+          <h2 class="section-title">Built with Precision. Powered by Intelligence.</h2>
+          <p class="section-desc">
+            CyberGuard AI unites deep rule-based heuristics with Google Gemini AI to analyze communication vectors before damage occurs.
+          </p>
+        </div>
+
+        <div class="card-grid-3">
+          <div class="apple-card">
+            <div class="card-icon-wrapper">💬</div>
+            <h3>AI Message Detection</h3>
+            <p>Scans SMS and WhatsApp text for banking fraud, fake electricity cutoff notices, prize scams, and emotional urgency cues.</p>
+            <a href="#message-scanner" class="card-link">Test Message Scanner &rarr;</a>
+          </div>
+
+          <div class="apple-card">
+            <div class="card-icon-wrapper">🔗</div>
+            <h3>Phishing URL Analysis</h3>
+            <p>Dissects domain structures, typosquatting variants, suspicious TLDs, and shortener redirections with real-time score assessment.</p>
+            <a href="#url-scanner" class="card-link">Test URL Scanner &rarr;</a>
+          </div>
+
+          <div class="apple-card">
+            <div class="card-icon-wrapper">✉️</div>
+            <h3>Email Fraud Detection</h3>
+            <p>Exposes Business Email Compromise (BEC), executive spoofing, generic salutations, and hidden credential harvesting traps.</p>
+            <a href="#email-scanner" class="card-link">Test Email Scanner &rarr;</a>
+          </div>
+
+          <div class="apple-card">
+            <div class="card-icon-wrapper">📚</div>
+            <h3>Cyber Awareness Hub</h3>
+            <p>10 real-world Indian cybercrime case studies with step-by-step victim journeys in English, हिन्दी, and मराठी.</p>
+            <a href="#awareness" class="card-link">Explore Awareness &rarr;</a>
+          </div>
+
+          <div class="apple-card">
+            <div class="card-icon-wrapper">💡</div>
+            <h3>Smart Recommendations</h3>
+            <p>Actionable, filterable security best practices for financial resilience, device safety, and strong password habits.</p>
+            <a href="#safety-tips" class="card-link">View Safety Tips &rarr;</a>
+          </div>
+
+          <div class="apple-card">
+            <div class="card-icon-wrapper">🎯</div>
+            <h3>Cybersecurity Quiz</h3>
+            <p>15 interactive scenario-based challenges with immediate feedback, detailed explanations, and security badge rankings.</p>
+            <a href="#quiz" class="card-link">Take the Quiz &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. SECTION C: HOW IT WORKS
+         ========================================================================= -->
+    <section class="section-padding section-bg-light" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Transparent Methodology</span>
+          <h2 class="section-title">How CyberGuard AI Protects You in 3 Steps</h2>
+          <p class="section-desc">
+            A frictionless three-stage threat analysis pipeline built for instantaneous cybercrime mitigation.
+          </p>
+        </div>
+
+        <div class="steps-container">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Submit Suspicious Content</h3>
+            <p>
+              Paste any suspicious SMS, WhatsApp message, shortened URL, or corporate email into the CyberGuard AI scanner interface.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>AI Threat Analysis</h3>
+            <p>
+              Our dual-layer engine inspects syntax markers, known scam databases, typosquatting variations, and coercive social engineering patterns.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Receive Actionable Guidance</h3>
+            <p>
+              Instantly receive a quantified Risk Score (0–100), highlighted red flags, threat category, and concrete preventative steps.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         6. SECTION D: SCANNER SUITE (MESSAGE, URL, EMAIL)
+         ========================================================================= -->
+    <section class="section-padding" id="scanners-suite">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Real-Time Detection Engine</span>
+          <h2 class="section-title">Analyze Suspicious Content</h2>
+          <p class="section-desc">
+            Choose a scanner below to inspect messages, links, or emails with genuine real-time threat intelligence.
+          </p>
+        </div>
+
+        <div class="scanner-suite-wrapper">
+          <!-- Scanner Tab Bar -->
+          <div class="scanner-tabs-bar" role="tablist">
+            <button class="scanner-tab-btn active" data-tab="tab-message" id="tab-btn-message" role="tab" aria-selected="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              <span>AI Message Scanner</span>
+            </button>
+            <button class="scanner-tab-btn" data-tab="tab-url" id="tab-btn-url" role="tab" aria-selected="false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+              </svg>
+              <span>Phishing URL Scanner</span>
+            </button>
+            <button class="scanner-tab-btn" data-tab="tab-email" id="tab-btn-email" role="tab" aria-selected="false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <span>Email Scam Detector</span>
+            </button>
+          </div>
+
+          <!-- TAB 1: MESSAGE SCANNER -->
+          <div class="scanner-tab-pane active" id="tab-message" role="tabpanel">
+            <div id="message-scanner">
+              <div class="scanner-header-row">
+                <div>
+                  <h3>Scan SMS, WhatsApp, or Direct Message</h3>
+                  <p style="font-size: 0.875rem; color: var(--color-text-secondary);">
+                    Paste any suspicious text claiming to be from a bank, electricity department, or lottery.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Quick Sample Preloads -->
+              <div class="sample-pills-row">
+                <span style="font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); align-self: center;">Try Sample:</span>
+                <button type="button" class="sample-pill" data-sample-msg="sbiKyc">SBI KYC Block Notice</button>
+                <button type="button" class="sample-pill" data-sample-msg="electricity">Electricity Bill Disconnect</button>
+                <button type="button" class="sample-pill" data-sample-msg="digitalArrest">CBI Digital Arrest Threat</button>
+                <button type="button" class="sample-pill" data-sample-msg="kbcLottery">KBC Lottery ₹25L Prize</button>
+                <button type="button" class="sample-pill" data-sample-msg="safeBank">Genuine UPI Debit Alert</button>
+              </div>
+
+              <div class="form-group">
+                <textarea id="message-input" class="form-textarea" placeholder="Paste suspicious SMS or WhatsApp message here... (e.g. 'Dear Customer, your electricity will be disconnected tonight at 9:30 PM...')"></textarea>
+              </div>
+
+              <div class="scanner-footer-row">
+                <span class="char-counter" id="message-char-count">0 characters</span>
+                <div class="scanner-actions">
+                  <button type="button" class="btn btn-secondary" id="clear-message-btn">Clear</button>
+                  <button type="button" class="btn btn-primary" id="analyze-message-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="11" cy="11" r="8"/>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <span>Analyse Message</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Loading State -->
+              <div class="scanner-loading" id="message-loading">
+                <div class="loading-radar-ring"></div>
+                <h4 class="loading-stage-text" id="message-loading-stage">Inspecting message patterns...</h4>
+                <p class="loading-subtext">Executing NLP syntax extraction and threat vector matching</p>
+              </div>
+
+              <!-- Message Result Card -->
+              <div class="analysis-result-card" id="message-result-card">
+                <div class="result-card-header" id="message-result-header">
+                  <div class="result-header-meta">
+                    <h4 id="message-category-display">Threat Category</h4>
+                    <span class="result-source-tag" id="message-source-display">CyberGuard Threat Intelligence</span>
+                  </div>
+                  <div class="result-score-gauge-box">
+                    <div class="risk-score-display" id="message-score-display">--/100</div>
+                    <span class="badge" id="message-level-badge">LOW RISK</span>
+                  </div>
+                </div>
+
+                <div class="result-card-body">
+                  <div class="result-meta-grid">
+                    <div class="result-meta-item" id="message-phrases-wrapper">
+                      <h5>Flagged Suspicious Phrases</h5>
+                      <div class="phrases-tags-list" id="message-phrases-container"></div>
+                    </div>
+                    <div class="result-meta-item">
+                      <h5>Risk Evaluation Summary</h5>
+                      <p id="message-meta-summary">Threat signatures parsed across NLP linguistic layers.</p>
+                    </div>
+                  </div>
+
+                  <h5 style="font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; color: var(--color-primary);">Identified Warning Signs:</h5>
+                  <ul class="warning-signs-list" id="message-warnings-list"></ul>
+
+                  <div class="result-explanation-box">
+                    <h5 style="margin-bottom: 6px; font-weight: 700;">Technical & Behavioral Analysis:</h5>
+                    <p id="message-explanation-text"></p>
+                  </div>
+
+                  <h5 style="font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; color: var(--color-primary);">Recommended Safety Actions:</h5>
+                  <ul class="actions-list" id="message-actions-list"></ul>
+
+                  <p class="result-disclaimer">
+                    Disclaimer: AI risk scores are automated probabilistic estimates and educational guidelines, not definitive legal proof of safety or fraud. Never transfer funds or share credentials based solely on automated assessment.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: PHISHING URL SCANNER -->
+          <div class="scanner-tab-pane" id="tab-url" role="tabpanel">
+            <div id="url-scanner">
+              <div class="scanner-header-row">
+                <div>
+                  <h3>Phishing & Typosquatting URL Scanner</h3>
+                  <p style="font-size: 0.875rem; color: var(--color-text-secondary);">
+                    Inspect website links for typosquatting, deceptive domain patterns, unencrypted HTTP, and URL shorteners.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Quick Sample Preloads -->
+              <div class="sample-pills-row">
+                <span style="font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); align-self: center;">Try Sample:</span>
+                <button type="button" class="sample-pill" data-sample-url="phishingSbi">Fake SBI KYC Portal</button>
+                <button type="button" class="sample-pill" data-sample-url="typosquatPaytm">Paytm Typosquat Domain</button>
+                <button type="button" class="sample-pill" data-sample-url="shortener">Bit.ly Obfuscated Shortlink</button>
+                <button type="button" class="sample-pill" data-sample-url="safeSbi">Official onlinesbi.sbi</button>
+                <button type="button" class="sample-pill" data-sample-url="safeApple">Official Apple India</button>
+              </div>
+
+              <div class="form-group">
+                <input type="text" id="url-input" class="form-input" placeholder="Paste the website URL you want to check (e.g. http://sbi-kyc-update-portal.online/login)">
+              </div>
+
+              <div class="scanner-footer-row">
+                <span style="font-size: 0.8125rem; color: var(--color-text-muted);">Inspects TLS encryption, TLD abuse, brand spoofing & IP formats</span>
+                <div class="scanner-actions">
+                  <button type="button" class="btn btn-secondary" id="clear-url-btn">Clear</button>
+                  <button type="button" class="btn btn-primary" id="analyze-url-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="11" cy="11" r="8"/>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <span>Analyse URL</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Loading State -->
+              <div class="scanner-loading" id="url-loading">
+                <div class="loading-radar-ring"></div>
+                <h4 class="loading-stage-text">Parsing domain DNS & SSL infrastructure...</h4>
+                <p class="loading-subtext">Checking Levenshtein brand distance and high-risk TLD registries</p>
+              </div>
+
+              <!-- URL Result Card -->
+              <div class="analysis-result-card" id="url-result-card">
+                <div class="result-card-header" id="url-result-header">
+                  <div class="result-header-meta">
+                    <h4 id="url-category-display">Domain Security Assessment</h4>
+                    <span class="result-source-tag" id="url-scanned-address">https://...</span>
+                  </div>
+                  <div class="result-score-gauge-box">
+                    <div class="risk-score-display" id="url-score-display">--/100</div>
+                    <span class="badge" id="url-level-badge">LOW RISK</span>
+                  </div>
+                </div>
+
+                <div class="result-card-body">
+                  <div class="result-meta-grid">
+                    <div class="result-meta-item">
+                      <h5>Hostname & Domain:</h5>
+                      <p id="url-hostname-display" style="font-family: var(--font-mono); font-size: 1rem;"></p>
+                    </div>
+                    <div class="result-meta-item">
+                      <h5>Transport Protocol:</h5>
+                      <span class="badge" id="url-protocol-badge">HTTPS Encrypted</span>
+                    </div>
+                  </div>
+
+                  <h5 style="font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; color: var(--color-primary);">Domain Red Flags & Anomaly Audit:</h5>
+                  <ul class="warning-signs-list" id="url-warnings-list"></ul>
+
+                  <h5 style="font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; color: var(--color-primary);">Recommended Safety Actions:</h5>
+                  <ul class="actions-list" id="url-actions-list"></ul>
+
+                  <p class="result-disclaimer" id="url-disclaimer-text">
+                    Note: HTTPS verifies data encryption in transit between your browser and the web server, NOT the ethical legitimacy of the website owner. Do not trust unknown websites solely because they display a padlock icon.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: EMAIL SCAM DETECTOR -->
+          <div class="scanner-tab-pane" id="tab-email" role="tabpanel">
+            <div id="email-scanner">
+              <div class="scanner-header-row">
+                <div>
+                  <h3>Email Scam & Spear-Phishing Detector</h3>
+                  <p style="font-size: 0.875rem; color: var(--color-text-secondary);">
+                    Paste sender and body text to analyze Business Email Compromise (BEC), spoofing, and wire fraud.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Quick Sample Preloads -->
+              <div class="sample-pills-row">
+                <span style="font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); align-self: center;">Try Sample:</span>
+                <button type="button" class="sample-pill" data-sample-email="bec">CEO Wire Transfer (BEC)</button>
+                <button type="button" class="sample-pill" data-sample-email="itRefund">Income Tax Refund Notice</button>
+                <button type="button" class="sample-pill" data-sample-email="safeNewsletter">Genuine Tech Digest Email</button>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label">Sender Email / Display Name (Optional)</label>
+                  <input type="text" id="email-sender-input" class="form-input" placeholder="e.g. HDFC Support &lt;support@hdfc-netbanking.com&gt;">
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label">Subject Line (Optional)</label>
+                  <input type="text" id="email-subject-input" class="form-input" placeholder="e.g. URGENT: Account Suspension Notice">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Email Body Content</label>
+                <textarea id="email-body-input" class="form-textarea" placeholder="Paste the full email text here..."></textarea>
+              </div>
+
+              <div class="scanner-footer-row">
+                <span style="font-size: 0.8125rem; color: var(--color-text-muted);">Privacy guarantee: No email accounts are connected or stored</span>
+                <div class="scanner-actions">
+                  <button type="button" class="btn btn-secondary" id="clear-email-btn">Clear</button>
+                  <button type="button" class="btn btn-primary" id="analyze-email-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="11" cy="11" r="8"/>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <span>Analyse Email</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Loading State -->
+              <div class="scanner-loading" id="email-loading">
+                <div class="loading-radar-ring"></div>
+                <h4 class="loading-stage-text">Evaluating email sender integrity & BEC heuristics...</h4>
+                <p class="loading-subtext">Scanning for urgency tactics, mismatched headers, and credential harvesters</p>
+              </div>
+
+              <!-- Email Result Card -->
+              <div class="analysis-result-card" id="email-result-card">
+                <div class="result-card-header" id="email-result-header">
+                  <div class="result-header-meta">
+                    <h4 id="email-category-display">Email Fraud Assessment</h4>
+                    <span class="result-source-tag">CyberGuard Email Intelligence Engine</span>
+                  </div>
+                  <div class="result-score-gauge-box">
+                    <div class="risk-score-display" id="email-score-display">--/100</div>
+                    <span class="badge" id="email-level-badge">LOW RISK</span>
+                  </div>
+                </div>
+
+                <div class="result-card-body">
+                  <h5 style="font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; color: var(--color-primary);">Identified Email Red Flags:</h5>
+                  <ul class="warning-signs-list" id="email-warnings-list"></ul>
+
+                  <div class="result-explanation-box">
+                    <h5 style="margin-bottom: 6px; font-weight: 700;">Email Diagnostic Breakdown:</h5>
+                    <p id="email-explanation-text"></p>
+                  </div>
+
+                  <h5 style="font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; color: var(--color-primary);">Recommended Safety Actions:</h5>
+                  <ul class="actions-list" id="email-actions-list"></ul>
+
+                  <p class="result-disclaimer">
+                    Disclaimer: Results are heuristic approximations. Never rely solely on automated scanners for targeted spear-phishing or executive impersonation defenses.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         7. SECTION E: SESSION DASHBOARD & ACTIVITY LOG
+         ========================================================================= -->
+    <section class="section-padding section-bg-light" id="dashboard">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Local Session Telemetry</span>
+          <h2 class="section-title">Session Activity & Threat Monitor</h2>
+          <p class="section-desc">
+            All analysis history is stored strictly in your browser session memory. No private messages or credentials are saved to external databases.
+          </p>
+        </div>
+
+        <div class="session-stats-grid">
+          <div class="stat-widget stat-total">
+            <div class="stat-widget-content">
+              <h3 id="dash-stat-total">0</h3>
+              <p>Total Scans Performed</p>
+            </div>
+            <div class="stat-widget-icon">📊</div>
+          </div>
+
+          <div class="stat-widget stat-high">
+            <div class="stat-widget-content">
+              <h3 id="dash-stat-high" style="color: var(--color-danger);">0</h3>
+              <p>High Risk Threats</p>
+            </div>
+            <div class="stat-widget-icon">🚨</div>
+          </div>
+
+          <div class="stat-widget stat-med">
+            <div class="stat-widget-content">
+              <h3 id="dash-stat-med" style="color: var(--color-warning);">0</h3>
+              <p>Medium Risk Warnings</p>
+            </div>
+            <div class="stat-widget-icon">⚠️</div>
+          </div>
+
+          <div class="stat-widget stat-low">
+            <div class="stat-widget-content">
+              <h3 id="dash-stat-low" style="color: var(--color-success);">0</h3>
+              <p>Low Risk Verified</p>
+            </div>
+            <div class="stat-widget-icon">🛡️</div>
+          </div>
+        </div>
+
+        <!-- Recent Scan History Table -->
+        <div class="history-card">
+          <div class="history-header">
+            <h4>Recent Scan Records</h4>
+            <button class="btn btn-secondary" id="clear-history-btn" style="padding: 6px 14px; font-size: 0.8125rem;">
+              Clear Session History
+            </button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="history-table" id="history-table" style="display: none;">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Type</th>
+                  <th>Scanned Snippet</th>
+                  <th>Assessment</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-body"></tbody>
+            </table>
+          </div>
+
+          <div class="empty-history-placeholder" id="empty-history-placeholder">
+            <p>No scans performed in this session yet. Run a scan above to see real-time history logs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scan Details Modal -->
+    <div id="scan-details-modal" style="display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 20px;">
+      <div style="background: #FFFFFF; border-radius: 20px; max-width: 650px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 32px; box-shadow: var(--shadow-lg); position: relative;">
+        <button id="close-modal-btn" style="position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-text-secondary);">&times;</button>
+        <h3 id="modal-scan-title" style="font-size: 1.35rem; color: var(--color-primary); margin-bottom: 8px;">Scan Details</h3>
+        <p style="margin-bottom: 16px;"><span class="badge" id="modal-scan-level">HIGH RISK</span> &bull; <span id="modal-scan-category" style="font-weight: 600;">Category</span></p>
+
+        <div style="background: var(--color-bg-light); padding: 14px; border-radius: 10px; margin-bottom: 20px; font-family: var(--font-mono); font-size: 0.875rem; word-break: break-all;" id="modal-scan-snippet"></div>
+
+        <h5 style="font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; color: var(--color-primary);">Identified Warning Signs:</h5>
+        <ul class="warning-signs-list" id="modal-scan-warnings" style="margin-bottom: 20px;"></ul>
+
+        <h5 style="font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; color: var(--color-primary);">Recommended Actions:</h5>
+        <ul class="actions-list" id="modal-scan-actions"></ul>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         8. SECTION F: CYBER AWARENESS CENTRE (10 TOPICS - EN, HI, MR)
+         ========================================================================= -->
+    <section class="section-padding" id="awareness">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Comprehensive Education</span>
+          <h2 class="section-title">Cyber Safety Awareness Centre</h2>
+          <p class="section-desc">
+            Deep educational guides on the 10 most pervasive modern cybercrimes in India with real-life case studies and prevention tactics.
+          </p>
+        </div>
+
+        <!-- Language Switcher Bar -->
+        <div class="awareness-lang-bar">
+          <button class="lang-btn active" data-lang="en">English</button>
+          <button class="lang-btn" data-lang="hi">हिन्दी (Hindi)</button>
+          <button class="lang-btn" data-lang="mr">मराठी (Marathi)</button>
+        </div>
+
+        <!-- Interactive Accordion Container -->
+        <div class="awareness-accordion" id="awareness-accordion-container"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         9. SECTION G: SMART SAFETY RECOMMENDATIONS
+         ========================================================================= -->
+    <section class="section-padding section-bg-light" id="safety-tips">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Actionable Defense Rules</span>
+          <h2 class="section-title">Smart Safety Recommendations</h2>
+          <p class="section-desc">
+            Essential operational security guidelines to insulate your accounts, devices, and financial identities from fraud.
+          </p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="tips-filter-bar">
+          <button class="tip-filter-btn active" data-category="all">All Guidelines (8)</button>
+          <button class="tip-filter-btn" data-category="financial">Financial Security</button>
+          <button class="tip-filter-btn" data-category="account">Account Protection</button>
+          <button class="tip-filter-btn" data-category="browsing">Browsing & Links</button>
+          <button class="tip-filter-btn" data-category="device">Device Safety</button>
+        </div>
+
+        <!-- Filterable Grid -->
+        <div class="card-grid-3" id="safety-tips-cards-grid"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         10. SECTION H: CYBERSECURITY QUIZ (15 QUESTIONS)
+         ========================================================================= -->
+    <section class="section-padding" id="quiz">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Interactive Skill Evaluation</span>
+          <h2 class="section-title">Test Your Cyber Vigilance</h2>
+          <p class="section-desc">
+            15 scenario-based challenges designed to test your ability to spot real-world scams and secure your digital assets.
+          </p>
+        </div>
+
+        <div class="quiz-wrapper">
+          <!-- Active Question Card -->
+          <div id="quiz-active-card">
+            <div class="quiz-header-bar">
+              <span id="quiz-question-number" style="font-weight: 700; color: var(--color-secondary); font-size: 0.875rem;">Question 1 of 15</span>
+              <span style="font-size: 0.8125rem; color: var(--color-text-secondary);">4 Points Per Correct Answer</span>
+            </div>
+
+            <div class="quiz-progress-track">
+              <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+            </div>
+
+            <h3 class="quiz-question-text" id="quiz-question-text">Loading question...</h3>
+
+            <div class="quiz-options-list" id="quiz-options-list"></div>
+
+            <div class="quiz-explanation-box" id="quiz-explanation-box"></div>
+
+            <div class="quiz-nav-footer">
+              <button class="btn btn-secondary" id="quiz-prev-btn" style="padding: 8px 18px; font-size: 0.875rem;">
+                &larr; Previous
+              </button>
+              <button class="btn btn-primary" id="quiz-next-btn" style="padding: 8px 24px; font-size: 0.875rem;" disabled>
+                Next Question &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Final Score Dashboard -->
+          <div class="quiz-result-view" id="quiz-result-view">
+            <div class="quiz-badge-icon" id="badge-icon">🏆</div>
+            <div class="quiz-score-number" id="final-score-display">15 / 15</div>
+            <p style="font-size: 1.15rem; font-weight: 600; color: var(--color-secondary); margin-bottom: 8px;" id="final-percentage-display">100%</p>
+            <h3 style="font-size: 1.5rem; color: var(--color-primary); margin-bottom: 10px;" id="badge-title">Cyber Defense Commander</h3>
+            <p style="max-width: 580px; margin: 0 auto 28px auto; color: var(--color-text-secondary);" id="badge-desc">
+              You demonstrate stellar awareness across all threat vectors.
+            </p>
+
+            <button class="btn btn-primary" id="retake-quiz-btn">Retake Quiz</button>
+
+            <!-- Detailed Answer Review List -->
+            <div class="quiz-review-list" id="quiz-review-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         11. SECTION I: CYBERCRIME HELP & REPORTING (INDIA 1930 & CYBERCRIME.GOV.IN)
+         ========================================================================= -->
+    <section class="section-padding" id="report">
+      <div class="container">
+        <div class="helpline-hero-box">
+          <span class="helpline-badge">🚨 Official Government Helpline</span>
+          <div class="helpline-number-cta">
+            <span>Dial</span> 1930 <span>National Cyber Financial Fraud Reporting Helpline</span>
+          </div>
+          <p style="font-size: 1.15rem; color: #CBD5E1; max-width: 720px; margin-bottom: 32px; line-height: 1.6;">
+            If you suspect you have been defrauded, reporting within the <strong>Golden Hour (first 2–3 hours)</strong> empowers authorities to freeze stolen funds in intermediary bank accounts before money is cashed out via mules or crypto.
+          </p>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+            <a href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer" class="btn btn-danger" style="font-size: 1rem; padding: 14px 28px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              <span>Report Cybercrime (cybercrime.gov.in)</span>
+            </a>
+            <a href="tel:1930" class="btn btn-outline-white">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <span>Call 1930 Now</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Evidence Preservation Checklist -->
+        <div class="section-header" style="margin-bottom: 36px;">
+          <span class="section-eyebrow">Critical Protocol</span>
+          <h3 style="font-size: 1.75rem; font-weight: 700; color: var(--color-primary); margin-bottom: 10px;">
+            Evidence Preservation Checklist
+          </h3>
+          <p class="section-desc">
+            To increase the probability of recovering funds or convicting criminals, follow these steps before reporting:
+          </p>
+        </div>
+
+        <div class="card-grid-3">
+          <div class="evidence-step-card">
+            <h4>📸 1. Capture Full Screenshots</h4>
+            <p style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6;">
+              Take uncropped screenshots of all WhatsApp messages, SMS alerts, fake payment gateway screens, and phone call logs with timestamps visible.
+            </p>
+          </div>
+
+          <div class="evidence-step-card">
+            <h4>🏦 2. Note Transaction UTR / Ref IDs</h4>
+            <p style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6;">
+              Record the 12-digit UPI Reference / UTR Number, beneficiary Virtual Payment Address (VPA), sender account number, and debit timestamp.
+            </p>
+          </div>
+
+          <div class="evidence-step-card">
+            <h4>🔒 3. Block Compromised Cards & Accounts</h4>
+            <p style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6;">
+              Immediately call your bank’s official 24x7 emergency helpline to freeze compromised debit cards, UPI IDs, and NetBanking access.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         12. SECTION J: ABOUT PROJECT PAGE (JSPM UNIVERSITY PUNE)
+         ========================================================================= -->
+    <section class="section-padding section-bg-light" id="about">
+      <div class="container">
+        <div class="about-hero-box">
+          <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); padding: 6px 14px; border-radius: var(--radius-full); font-size: 0.8125rem; font-weight: 700; color: #38BDF8; margin-bottom: 20px;">
+            🎓 Third-Year Engineering Innovation Project
+          </div>
+
+          <h2 style="font-size: clamp(2rem, 3.8vw, 3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px;">
+            AI-Based Cybercrime Detection and Awareness System (CyberGuard AI)
+          </h2>
+
+          <p style="font-size: 1.15rem; color: #94A3B8; margin-bottom: 28px; max-width: 820px; line-height: 1.6;">
+            A holistic cybersecurity initiative designed and engineered by undergraduate students in the Department of Electronics and Telecommunication Engineering at JSPM University Pune.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.12);">
+            <div>
+              <p style="font-size: 0.75rem; text-transform: uppercase; color: #64748B; font-weight: 700;">Institution</p>
+              <h4 style="font-size: 1.05rem; font-weight: 600; color: #FFFFFF;">JSPM University Pune</h4>
+            </div>
+            <div>
+              <p style="font-size: 0.75rem; text-transform: uppercase; color: #64748B; font-weight: 700;">Department</p>
+              <h4 style="font-size: 1.05rem; font-weight: 600; color: #FFFFFF;">Electronics & Telecommunication</h4>
+            </div>
+            <div>
+              <p style="font-size: 0.75rem; text-transform: uppercase; color: #64748B; font-weight: 700;">Course & Code</p>
+              <h4 style="font-size: 1.05rem; font-weight: 600; color: #FFFFFF;">Innovation (230IINB02_05)</h4>
+            </div>
+            <div>
+              <p style="font-size: 0.75rem; text-transform: uppercase; color: #64748B; font-weight: 700;">Academic Year</p>
+              <h4 style="font-size: 1.05rem; font-weight: 600; color: #FFFFFF;">2026–27</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Guide Card -->
+        <div style="background: #FFFFFF; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-sm); margin-bottom: 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: #EFF6FF; color: var(--color-secondary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700;">
+              🎓
+            </div>
+            <div>
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-secondary); text-transform: uppercase;">Project Mentorship</span>
+              <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--color-primary); margin-bottom: 2px;">Faculty Project Guide</h3>
+              <p style="font-size: 0.875rem; color: var(--color-text-secondary);">Assistant Professor, Dept of Electronics & Telecommunication Engineering</p>
+            </div>
+          </div>
+          <span class="badge badge-low" style="font-size: 0.8125rem;">Faculty of Science & Technology</span>
+        </div>
+
+        <!-- Student Innovators -->
+        <div class="section-header" style="margin-bottom: 24px;">
+          <span class="section-eyebrow">Engineering Divisions</span>
+          <h3 style="font-size: 1.6rem; font-weight: 700; color: var(--color-primary);">Innovation Project Engineering Divisions</h3>
+        </div>
+
+        <div class="team-grid" id="project-team-grid"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         13. SECTION K: CALL TO ACTION (APPLE STYLE)
+         ========================================================================= -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="cta-banner">
+          <span class="badge badge-subtle" style="margin-bottom: 16px;">Instant Online Verification</span>
+          <h2>Think Before You Click.</h2>
+          <p>
+            One smart decision can protect your digital identity, your savings, and your family from financial fraud.
+          </p>
+          <a href="#message-scanner" class="btn btn-primary" style="font-size: 1rem; padding: 14px 32px;">
+            <span>Scan a Suspicious Message</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       14. FOOTER (APPLE PREMIUM MINIMAL STYLE)
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-secondary);">
+              <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm0 2.18l6 2.25v4.66c0 4.1-2.6 7.9-6 8.91-3.4-1.01-6-4.81-6-8.91V6.43l6-2.25zM11 7h2v6h-2V7zm0 8h2v2h-2v-2z"/>
+            </svg>
+            <h3 style="margin-bottom: 0;">CyberGuard AI</h3>
+          </div>
+          <p style="margin-bottom: 16px; line-height: 1.6;">
+            Making the digital world safer through artificial intelligence, heuristic threat analysis, and proactive public awareness.
+          </p>
+          <p style="font-size: 0.75rem; color: var(--color-text-muted);">
+            Developed by Electronics and Telecommunication Engineering students at JSPM University Pune.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links-list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#message-scanner">Message Scanner</a></li>
+            <li><a href="#url-scanner">URL Scanner</a></li>
+            <li><a href="#email-scanner">Email Scanner</a></li>
+            <li><a href="#dashboard">Session Monitor</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul class="footer-links-list">
+            <li><a href="#awareness">Cyber Awareness Hub</a></li>
+            <li><a href="#safety-tips">Smart Safety Rules</a></li>
+            <li><a href="#quiz">Cybersecurity Quiz</a></li>
+            <li><a href="#about">About Project & Team</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Emergency Help</h4>
+          <ul class="footer-links-list">
+            <li><a href="tel:1930" style="color: var(--color-danger); font-weight: 700;">Helpline: 1930 (24x7)</a></li>
+            <li><a href="https://cybercrime.gov.in/" target="_blank" rel="noopener">cybercrime.gov.in</a></li>
+            <li><a href="https://rbi.org.in/" target="_blank" rel="noopener">RBI Sachet Portal</a></li>
+            <li><a href="https://uidai.gov.in/" target="_blank" rel="noopener">UIDAI Masked Aadhaar</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p>&copy; 2026 CyberGuard AI. JSPM University Pune. All Rights Reserved.</p>
+        <p style="font-size: 0.75rem; color: var(--color-text-muted);">
+          Privacy First: All scans run in volatile session memory. Zero personal credentials or messages are harvested.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
