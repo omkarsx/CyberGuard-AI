@@ -46,6 +46,11 @@ function setupNavigation() {
       mobileDrawer.setAttribute('aria-hidden', String(!isOpen));
       mobileDrawer.inert = !isOpen;
       document.body.classList.toggle('nav-open', isOpen);
+      document.querySelector('main')?.toggleAttribute('inert', isOpen);
+      document.querySelector('.site-footer')?.toggleAttribute('inert', isOpen);
+      document.querySelector('main')?.setAttribute('aria-hidden', String(isOpen));
+      document.querySelector('.site-footer')?.setAttribute('aria-hidden', String(isOpen));
+      if (isOpen) mobileDrawer.querySelector('a')?.focus();
     });
   }
 
@@ -63,6 +68,10 @@ function setupNavigation() {
             mobileDrawer.inert = true;
             mobileToggle?.setAttribute('aria-expanded', 'false');
             document.body.classList.remove('nav-open');
+            document.querySelector('main')?.removeAttribute('inert');
+            document.querySelector('.site-footer')?.removeAttribute('inert');
+            document.querySelector('main')?.removeAttribute('aria-hidden');
+            document.querySelector('.site-footer')?.removeAttribute('aria-hidden');
           }
           const navOffset = 64;
           const elementPosition = target.getBoundingClientRect().top;
@@ -81,23 +90,46 @@ function setupNavigation() {
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && mobileDrawer?.classList.contains('open')) {
+    if (!mobileDrawer?.classList.contains('open')) return;
+
+    if (event.key === 'Tab') {
+      const focusable = [...mobileDrawer.querySelectorAll('a[href], button:not(:disabled)')];
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === mobileToggle)) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    }
+
+    if (event.key === 'Escape') {
       mobileDrawer.classList.remove('open');
       mobileDrawer.setAttribute('aria-hidden', 'true');
       mobileDrawer.inert = true;
       mobileToggle?.setAttribute('aria-expanded', 'false');
       document.body.classList.remove('nav-open');
+      document.querySelector('main')?.removeAttribute('inert');
+      document.querySelector('.site-footer')?.removeAttribute('inert');
+      document.querySelector('main')?.removeAttribute('aria-hidden');
+      document.querySelector('.site-footer')?.removeAttribute('aria-hidden');
       mobileToggle?.focus();
     }
   });
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 768 && mobileDrawer?.classList.contains('open')) {
+    if (window.innerWidth > 940 && mobileDrawer?.classList.contains('open')) {
       mobileDrawer.classList.remove('open');
       mobileDrawer.setAttribute('aria-hidden', 'true');
       mobileDrawer.inert = true;
       mobileToggle?.setAttribute('aria-expanded', 'false');
       document.body.classList.remove('nav-open');
+      document.querySelector('main')?.removeAttribute('inert');
+      document.querySelector('.site-footer')?.removeAttribute('inert');
+      document.querySelector('main')?.removeAttribute('aria-hidden');
+      document.querySelector('.site-footer')?.removeAttribute('aria-hidden');
     }
   }, { passive: true });
 
