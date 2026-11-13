@@ -1966,3 +1966,133 @@ img, svg {
     scroll-behavior: auto !important;
   }
 }
+
+/* CyberGuard field-guide visual system */
+:root {
+  --color-primary: #17251f;
+  --color-secondary: #2f664e;
+  --color-accent: #df6b43;
+  --color-bg: #f7f5ef;
+  --color-bg-light: #eeece4;
+  --color-bg-subtle: #fbfaf6;
+  --color-surface: #fffefa;
+  --color-surface-hover: #f3f1e9;
+  --color-text-main: #202a24;
+  --color-text-secondary: #5e685f;
+  --color-text-muted: #798078;
+  --color-border: #d9d9cf;
+  --color-border-subtle: #e8e7de;
+  --radius-sm: 5px;
+  --radius-md: 9px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 2px 8px rgba(23,37,31,.04);
+  --shadow-md: 0 10px 28px rgba(23,37,31,.07);
+  --shadow-lg: 0 18px 48px rgba(23,37,31,.12);
+  --shadow-card: 0 5px 18px rgba(23,37,31,.045);
+  --transition-fast: 160ms ease;
+  --transition-base: 220ms ease;
+}
+
+html { background: var(--color-bg); }
+body { background: var(--color-bg); }
+.container { max-width: 1240px; }
+.navbar {
+  height: 66px;
+  background: rgba(247,245,239,.94);
+  border-bottom: 1px solid var(--color-border);
+  backdrop-filter: blur(14px);
+}
+.nav-container { max-width: 1240px; }
+.nav-brand { font-family: Georgia, 'Times New Roman', serif; font-size: 1.18rem; letter-spacing: -.04em; }
+.nav-logo-icon { color: var(--color-secondary); }
+.nav-link { color: #435047; letter-spacing: 0; }
+.nav-link.active::after { background: var(--color-accent); }
+.nav-cta-btn, .btn-primary { background: var(--color-secondary); border-radius: 6px; }
+.nav-cta-btn:hover, .btn-primary:hover { background: #234f3c; }
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  padding: 86px 0 82px;
+  color: #f7f5ef;
+  background: #17251f;
+}
+.hero-section::before {
+  position: absolute;
+  inset: 0 0 0 54%;
+  content: '';
+  opacity: .16;
+  background-image: linear-gradient(rgba(245,243,233,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(245,243,233,.35) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(90deg, transparent, #000 45%);
+}
+.hero-content, .hero-visual-wrapper { position: relative; z-index: 1; }
+.hero-badge-pill { color: #d9dfd5; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.17); border-radius: 4px; }
+.hero-badge-dot { background: #e27a51; box-shadow: 0 0 0 4px rgba(226,122,81,.16); }
+.hero-title { max-width: 720px; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(3rem, 6vw, 5.7rem); line-height: .99; letter-spacing: -.055em; font-weight: 500; }
+.gradient-text { color: #ed9a73; background: none; -webkit-text-fill-color: currentColor; }
+.hero-subtitle { max-width: 560px; color: #c5cec5; font-size: 1.05rem; line-height: 1.75; }
+.hero-cta-group { margin-top: 30px; }
+.btn { border-radius: 6px; }
+.hero-cta-group .btn-primary { color: #17251f; background: #efaa83; }
+.hero-cta-group .btn-primary:hover { background: #f3ba98; }
+.hero-cta-group .btn-secondary { color: #f7f5ef; border-color: rgba(255,255,255,.3); background: transparent; }
+.hero-stats-row { border-top-color: rgba(255,255,255,.2); }
+.hero-stat-item h4 { color: #f2a27c; font-family: Georgia, 'Times New Roman', serif; font-size: 1.7rem; }
+.hero-stat-item p { color: #bdc8be; }
+.shield-container { filter: saturate(.55); }
+.floating-chip { border-radius: 5px; box-shadow: 0 10px 24px rgba(0,0,0,.2); }
+
+.section-padding { padding-top: 86px; padding-bottom: 86px; }
+.section-bg-light { background: #eeece4; }
+.section-eyebrow { color: var(--color-accent); letter-spacing: .12em; font-size: .72rem; }
+.section-title { color: var(--color-primary); font-family: Georgia, 'Times New Roman', serif; font-weight: 500; letter-spacing: -.04em; }
+.section-desc { font-size: 1.02rem; }
+.apple-card, .evidence-step-card, .step-card, .team-card {
+  border-radius: 10px;
+  border-color: var(--color-border);
+  box-shadow: none;
+}
+.apple-card { background: var(--color-surface); }
+.apple-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: #b8c7bb; }
+.card-icon-wrapper { border-radius: 8px; background: #e9efe8; color: var(--color-secondary); }
+.card-link { color: var(--color-secondary); }
+.steps-container { gap: 18px; }
+.step-card { background: var(--color-surface); }
+.step-number { color: var(--color-accent); background: #f8e9df; border-radius: 6px; }
+
+.scanner-suite-wrapper, .quiz-wrapper { border-radius: 12px; }
+.scanner-tab-btn.active { color: var(--color-secondary); border-color: var(--color-secondary); }
+textarea, input, select { border-radius: 6px !important; }
+.sample-pill { border-radius: 5px; }
+.badge { border-radius: 4px; }
+.cta-banner { background: #e9ede5; border: 1px solid #d2dbd0; border-radius: 12px; box-shadow: none; }
+.cta-banner h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 500; letter-spacing: -.04em; }
+.helpline-hero-box, .about-hero-box { border-radius: 12px; }
+.site-footer { background: #eae8df; }
+.footer-bottom-bar { border-color: #d4d2c9; }
+.mobile-nav-drawer { background: var(--color-bg); }
+.mobile-nav-drawer .nav-link { color: var(--color-primary); }
+:focus-visible { outline: 3px solid #e27a51; outline-offset: 3px; }
+
+@media (max-width: 1024px) {
+  .hero-section { padding: 66px 0 62px; }
+  .hero-section::before { left: 0; }
+  .hero-title { margin-inline: auto; }
+}
+@media (min-width: 769px) and (max-width: 1120px) {
+  .nav-menu { gap: 12px; }
+  .nav-link { font-size: .72rem; }
+  .nav-container { padding-inline: 16px; }
+  .nav-brand { font-size: 1rem; gap: 6px; }
+}
+@media (max-width: 768px) {
+  .navbar { height: 56px; }
+  .hero-section { padding: 54px 0; }
+  .hero-section::before { inset: 0; opacity: .1; }
+  .hero-title { font-size: clamp(2.7rem, 12vw, 4.2rem); }
+  .hero-stats-row { gap: 14px; }
+  .section-padding { padding-block: 58px; }
+  .section-header { margin-bottom: 38px; }
+}
+

@@ -9,7 +9,7 @@ import { initSafetyTips } from './tips.js';
 import { initQuizEngine } from './quiz.js';
 import { renderAboutProjectSection } from './about.js';
 
-// Session Activity Store (persisted in session/localStorage for UX)
+// Keep scan history for this tab only; it is cleared when the tab closes.
 let sessionScanHistory = [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -43,6 +43,7 @@ function setupNavigation() {
     mobileToggle.addEventListener('click', () => {
       const isOpen = mobileDrawer.classList.toggle('open');
       mobileToggle.setAttribute('aria-expanded', isOpen);
+      mobileDrawer.setAttribute('aria-hidden', String(!isOpen));
     });
   }
 
@@ -54,7 +55,11 @@ function setupNavigation() {
         e.preventDefault();
         const target = document.querySelector(href);
         if (target) {
-          if (mobileDrawer) mobileDrawer.classList.remove('open');
+          if (mobileDrawer) {
+            mobileDrawer.classList.remove('open');
+            mobileDrawer.setAttribute('aria-hidden', 'true');
+            mobileToggle?.setAttribute('aria-expanded', 'false');
+          }
           const navOffset = 64;
           const elementPosition = target.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - navOffset;
@@ -69,6 +74,15 @@ function setupNavigation() {
         }
       }
     });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && mobileDrawer?.classList.contains('open')) {
+      mobileDrawer.classList.remove('open');
+      mobileDrawer.setAttribute('aria-hidden', 'true');
+      mobileToggle?.setAttribute('aria-expanded', 'false');
+      mobileToggle?.focus();
+    }
   });
 
   // Scrollspy for active nav link
@@ -106,19 +120,20 @@ function updateActiveNavLink(hash) {
 // --------------------------------------------------------------------------
 function loadSessionHistory() {
   try {
-    const saved = localStorage.getItem('cyberguard_session_history');
+    const saved = sessionStorage.getItem('cyberguard_session_history');
     if (saved) {
       sessionScanHistory = JSON.parse(saved);
     }
   } catch (e) {
     sessionScanHistory = [];
   }
+
   renderDashboardHistory();
 }
 
 function saveSessionHistory() {
   try {
-    localStorage.setItem('cyberguard_session_history', JSON.stringify(sessionScanHistory));
+    sessionStorage.setItem('cyberguard_session_history', JSON.stringify(sessionScanHistory));
   } catch (e) {}
   renderDashboardHistory();
 }

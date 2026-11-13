@@ -42,7 +42,7 @@
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
         </a>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation Menu">
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="3" y1="6" x2="21" y2="6"/>
             <line x1="3" y1="12" x2="21" y2="12"/>
@@ -54,7 +54,7 @@
   </nav>
 
   <!-- Mobile Drawer -->
-  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true">
     <a href="#home" class="nav-link mobile-drawer-link">Home</a>
     <a href="#message-scanner" class="nav-link mobile-drawer-link">AI Message Scanner</a>
     <a href="#url-scanner" class="nav-link mobile-drawer-link">Phishing URL Scanner</a>
@@ -83,13 +83,13 @@
             </div>
 
             <h1 class="hero-title">
-              Your Digital World.<br>
-              Your Security.<br>
-              <span class="gradient-text">Our Intelligence.</span>
+              Pause.<br>
+              Check.<br>
+              <span class="gradient-text">Then decide.</span>
             </h1>
 
             <p class="hero-subtitle">
-              Meet CyberGuard AI — your intelligent companion for detecting online scams, identifying suspicious messages and building a safer digital future.
+              Check suspicious messages, links and emails before you act. CyberGuard explains the warning signs and gives you practical next steps.
             </p>
 
             <div class="hero-cta-group">
@@ -114,11 +114,11 @@
               </div>
               <div class="hero-stat-item">
                 <h4>1930</h4>
-                <p>National Helpline Ready</p>
+                <p>Cyber fraud helpline</p>
               </div>
               <div class="hero-stat-item">
-                <h4>100%</h4>
-                <p>Client Privacy Preserved</p>
+                <h4>50</h4>
+                <p>Recent scans kept in this tab</p>
               </div>
             </div>
           </div>
@@ -157,7 +157,7 @@
                 <path d="M94 120 L98 124 L107 115" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
 
-              <!-- Floating Apple-style Info Badges -->
+            <!-- Quick safety reminders -->
               <div class="floating-chip chip-1">
                 <span>🛡️</span>
                 <span>OTP Shield Active</span>
@@ -167,8 +167,8 @@
                 <span>Typosquat Intelligence</span>
               </div>
               <div class="floating-chip chip-3">
-                <span>🤖</span>
-                <span>AI Heuristics v2.4</span>
+                <span>↗</span>
+                <span>Check the sender too</span>
               </div>
             </div>
           </div>
@@ -283,10 +283,10 @@
     <section class="section-padding" id="introducing">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Enterprise-Grade Protection</span>
-          <h2 class="section-title">Built with Precision. Powered by Intelligence.</h2>
+          <span class="section-eyebrow">A practical safety toolkit</span>
+          <h2 class="section-title">Clear checks for everyday online risks</h2>
           <p class="section-desc">
-            CyberGuard AI unites deep rule-based heuristics with Google Gemini AI to analyze communication vectors before damage occurs.
+            Use the scanners as a first check. Each result explains its warning signs; always verify important requests through a trusted channel.
           </p>
         </div>
 
@@ -694,7 +694,7 @@
           <span class="section-eyebrow">Local Session Telemetry</span>
           <h2 class="section-title">Session Activity & Threat Monitor</h2>
           <p class="section-desc">
-            All analysis history is stored strictly in your browser session memory. No private messages or credentials are saved to external databases.
+            Your recent scan history is kept in this browser tab and cleared when you close it. Scanned content is sent to this app’s server for analysis.
           </p>
         </div>
 
@@ -1101,7 +1101,7 @@
       <div class="footer-bottom-bar">
         <p>&copy; 2026 CyberGuard AI. JSPM University Pune. All Rights Reserved.</p>
         <p style="font-size: 0.75rem; color: var(--color-text-muted);">
-          Privacy First: All scans run in volatile session memory. Zero personal credentials or messages are harvested.
+          Scan history stays in this tab. Content entered into a scanner is sent to the app server for analysis; avoid submitting passwords, OTPs or other sensitive details.
         </p>
       </div>
     </div>
