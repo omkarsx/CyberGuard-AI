@@ -17,9 +17,12 @@ export function apiUrl(path) {
 }
 
 export async function postJson(path, payload) {
+  // Resolve configuration before the network try/catch so setup errors are not
+  // mislabeled as network or CORS failures.
+  const endpoint = apiUrl(path);
   let response;
   try {
-    response = await fetch(apiUrl(path), {
+    response = await fetch(endpoint, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
     });
   } catch (error) {
