@@ -319,7 +319,7 @@ function showHistoryModal(record) {
 
 async function syncBackendStats() {
   try {
-    const res = await fetch('/api/stats');
+    const res = await fetch(apiUrl('/api/stats'));
     if (res.ok) {
       const data = await res.json();
       console.log('Backend telemetry status:', data.stats);
@@ -337,3 +337,4 @@ function escapeHtml(str) {
     '"': '&quot;'
   }[tag] || tag));
 }
+import { apiUrl } from './api-client.js';

@@ -1,3 +1,6 @@
+import { normalizeHttpUrl } from './url-utils.js';
+import { postJson } from './api-client.js';
+
 /**
  * CyberGuard AI - Scanner Suite Engine
  * Handles Message Scanner, Phishing URL Scanner, and Email Scam Detector
@@ -137,13 +140,7 @@ function setupMessageScanner(onScanCompleted) {
     }, 350);
 
     try {
-      const response = await fetch('/api/scan-message', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text })
-      });
-
-      const data = await response.json();
+      const data = await postJson('/api/scan-message', { message: text });
       clearInterval(interval);
       loading.classList.remove('active');
       analyzeBtn.disabled = false;
@@ -222,12 +219,14 @@ function setupUrlScanner(onScanCompleted) {
   const analyzeBtn = document.getElementById('analyze-url-btn');
   const loading = document.getElementById('url-loading');
   const resultCard = document.getElementById('url-result-card');
+  const errorBox = document.getElementById('url-scanner-error');
 
   if (!input) return;
 
   clearBtn.addEventListener('click', () => {
     input.value = '';
     resultCard.classList.remove('active');
+    errorBox.hidden = true;
   });
 
   // Sample Buttons
@@ -237,37 +236,31 @@ function setupUrlScanner(onScanCompleted) {
       if (SAMPLES.url[sampleKey]) {
         input.value = SAMPLES.url[sampleKey];
         resultCard.classList.remove('active');
+        errorBox.hidden = true;
       }
     });
   });
 
   analyzeBtn.addEventListener('click', async () => {
-    const rawUrl = input.value.trim();
-    if (!rawUrl) {
-      alert('Please enter a website URL to scan.');
+    let rawUrl;
+    try { rawUrl = normalizeHttpUrl(input.value); }
+    catch (error) {
+      errorBox.textContent = error.message;
+      errorBox.hidden = false;
       input.focus();
       return;
     }
 
+    input.value = rawUrl;
+    errorBox.hidden = true;
     analyzeBtn.disabled = true;
     resultCard.classList.remove('active');
     loading.classList.add('active');
 
     try {
-      const response = await fetch('/api/scan-url', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: rawUrl })
-      });
-
-      const data = await response.json();
+      const data = await postJson('/api/scan-url', { url: rawUrl });
       loading.classList.remove('active');
       analyzeBtn.disabled = false;
-
-      if (!data.success) {
-        alert(data.error || 'Failed to analyze URL.');
-        return;
-      }
 
       renderUrlResult(data.result);
       if (typeof onScanCompleted === 'function') {
@@ -284,7 +277,8 @@ function setupUrlScanner(onScanCompleted) {
     } catch (err) {
       loading.classList.remove('active');
       analyzeBtn.disabled = false;
-      alert('Network error connecting to URL analysis server: ' + err.message);
+      errorBox.textContent = err.message || 'The URL could not be analyzed. Please try again.';
+      errorBox.hidden = false;
     }
   });
 }
@@ -297,6 +291,12 @@ function renderUrlResult(res) {
   document.getElementById('url-category-display').textContent = res.threatCategory;
   document.getElementById('url-scanned-address').textContent = res.url;
   document.getElementById('url-hostname-display').textContent = res.hostname;
+  document.getElementById('url-dns-display').textContent = res.dns?.status === 'resolved'
+    ? `Resolved (${res.dns.addresses.length} public address${res.dns.addresses.length === 1 ? '' : 'es'})`
+    : res.dns?.status === 'failed' ? 'Lookup failed' : 'Not checked';
+  document.getElementById('url-tls-display').textContent = res.tls?.status === 'valid'
+    ? `Valid${res.tls.validTo ? ` · expires ${new Date(res.tls.validTo).toLocaleDateString()}` : ''}`
+    : res.tls?.status === 'invalid' ? 'Invalid certificate' : res.tls?.status === 'unavailable' ? 'Check unavailable' : 'Not applicable';
 
   const protocolBadge = document.getElementById('url-protocol-badge');
   if (res.isHttps) {
@@ -378,13 +378,7 @@ function setupEmailScanner(onScanCompleted) {
     loading.classList.add('active');
 
     try {
-      const response = await fetch('/api/scan-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sender, subject, body })
-      });
-
-      const data = await response.json();
+      const data = await postJson('/api/scan-email', { sender, subject, body });
       loading.classList.remove('active');
       analyzeBtn.disabled = false;
 

@@ -8,11 +8,16 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import url from 'node:url';
+import dns from 'node:dns/promises';
+import net from 'node:net';
+import tls from 'node:tls';
+import { normalizeHttpUrl } from './public/js/url-utils.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const PORT = process.env.PORT || 3000;
+const allowedOrigins = new Set((process.env.CORS_ORIGINS || 'http://localhost:3000,http://127.0.0.1:3000,https://omkarsx.github.io').split(',').map(value => value.trim()).filter(Boolean));
 
 // In-memory session stats (reset on server restart, privacy-preserving)
 let sessionStats = {
@@ -326,27 +331,46 @@ function analyzeMessageHeuristics(message) {
 // ==========================================
 // 2. URL SCANNING HEURISTIC ENGINE
 // ==========================================
-function analyzeUrlHeuristics(inputUrl) {
-  let raw = inputUrl.trim();
-  if (!/^https?:\/\//i.test(raw)) {
-    raw = 'https://' + raw;
+function isPublicIp(address) {
+  const family = net.isIP(address);
+  if (family === 4) {
+    const [a, b] = address.split('.').map(Number);
+    return !(a === 0 || a === 10 || a === 127 || a >= 224 || (a === 100 && b >= 64 && b <= 127) ||
+      (a === 169 && b === 254) || (a === 172 && b >= 16 && b <= 31) || (a === 192 && (b === 168 || b === 0 || b === 2)) ||
+      (a === 198 && (b === 18 || b === 19 || b === 51)) || (a === 203 && b === 0));
   }
+  if (family === 6) return /^[23]/i.test(address);
+  return false;
+}
 
-  let parsed;
-  try {
-    parsed = new URL(raw);
-  } catch (err) {
-    return {
-      error: 'Invalid URL format. Please provide a well-formed web address (e.g., https://example.com).'
-    };
-  }
+function connectTls(hostname, address) {
+  return new Promise(resolve => {
+    const socket = tls.connect({ host: address, port: 443, servername: net.isIP(hostname) ? undefined : hostname, rejectUnauthorized: false, timeout: 4500 });
+    const finish = result => { socket.destroy(); resolve(result); };
+    socket.once('secureConnect', () => {
+      const cert = socket.getPeerCertificate();
+      const identityError = net.isIP(hostname) ? null : tls.checkServerIdentity(hostname, cert);
+      const valid = socket.authorized && !identityError;
+      finish({ status: valid ? 'valid' : 'invalid', authorized: valid,
+        error: valid ? null : (identityError?.message || socket.authorizationError || 'Certificate could not be verified'),
+        validTo: cert.valid_to || null, issuer: cert.issuer?.O || cert.issuer?.CN || null });
+    });
+    socket.once('timeout', () => finish({ status: 'unavailable', authorized: false, error: 'TLS connection timed out' }));
+    socket.once('error', err => finish({ status: 'unavailable', authorized: false, error: err.message }));
+  });
+}
+
+async function analyzeUrlHeuristics(inputUrl) {
+  let raw;
+  try { raw = normalizeHttpUrl(inputUrl); } catch (err) { return { error: err.message }; }
+  const parsed = new URL(raw);
 
   const hostname = parsed.hostname.toLowerCase();
   const pathname = parsed.pathname;
   const protocol = parsed.protocol;
   const warningSigns = [];
   let score = 5;
-  let category = 'Legitimate Web Resource';
+  let category = 'Heuristic URL Assessment';
 
   // 1. Protocol check
   const isHttps = protocol === 'https:';
@@ -369,7 +393,7 @@ function analyzeUrlHeuristics(inputUrl) {
   if (SUSPICIOUS_TLDS.has(tld)) {
     warningSigns.push(`High-risk Top-Level Domain (.${tld}): Frequently abused in low-cost automated phishing campaigns.`);
     score += 25;
-    if (category === 'Legitimate Web Resource') category = 'Suspicious Domain Infrastructure';
+    if (category === 'Heuristic URL Assessment') category = 'Suspicious Domain Infrastructure';
   }
 
   // 4. URL Shortener detection
@@ -383,9 +407,9 @@ function analyzeUrlHeuristics(inputUrl) {
   let brandImpersonated = null;
   for (const b of MONITORED_BRANDS) {
     for (const tok of b.tokens) {
-      if (hostname.includes(tok)) {
+      if (hostname.split('.').includes(tok)) {
         // Check if it's the official domain
-        if (!hostname.endsWith(b.domain)) {
+        if (!(hostname === b.domain || hostname.endsWith(`.${b.domain}`))) {
           brandImpersonated = b.name;
           warningSigns.push(`Brand Impersonation: Domain contains "${tok}" but does not belong to the authentic organization (${b.domain}).`);
           score += 50;
@@ -398,12 +422,13 @@ function analyzeUrlHeuristics(inputUrl) {
   // Levenshtein typosquatting check on major brands
   if (!brandImpersonated && domainParts.length >= 2) {
     const mainLabel = domainParts[domainParts.length - 2];
+    const domainTokens = mainLabel.split(/[^a-z\d]+/i).filter(Boolean);
     for (const b of MONITORED_BRANDS) {
       for (const tok of b.tokens) {
         if (tok.length >= 4) {
-          const dist = levenshtein(mainLabel, tok);
-          if (dist === 1) {
-            warningSigns.push(`Typosquatting Detected: Domain "${mainLabel}" is an intentional 1-character typo variation of "${tok}" (${b.name}).`);
+          const suspiciousToken = domainTokens.find(label => levenshtein(label, tok) === 1);
+          if (suspiciousToken) {
+            warningSigns.push(`Possible typosquatting: domain label "${suspiciousToken}" is one character away from the monitored brand "${tok}" (${b.name}).`);
             score += 45;
             category = `Typosquatting Phishing (${b.name})`;
           }
@@ -439,14 +464,34 @@ function analyzeUrlHeuristics(inputUrl) {
     }
   }
 
-  // Known trusted domains (whitelist check)
-  const trustedDomains = ['apple.com', 'google.com', 'microsoft.com', 'onlinesbi.sbi', 'hdfcbank.com', 'gov.in', 'jspm.edu.in', 'jspmuni.ac.in', 'github.com', 'wikipedia.org'];
-  const isTrusted = trustedDomains.some(td => hostname === td || hostname.endsWith('.' + td));
-  if (isTrusted && warningSigns.length <= 1) {
-    score = 5;
-    category = 'Verified Authentic Domain';
-    warningSigns.length = 0;
+  const port = parsed.port ? Number(parsed.port) : (isHttps ? 443 : 80);
+  let dnsCheck = { status: 'unavailable', addresses: [], error: null };
+  let tlsCheck = { status: 'not_applicable', authorized: false, error: null, validTo: null, issuer: null };
+  if (/^\d{1,3}(?:\.\d{1,3}){3}$/.test(hostname)) {
+    if (!isPublicIp(hostname)) return { error: 'Scanning private or reserved IP addresses is not allowed.' };
+    dnsCheck = { status: 'not_applicable', addresses: [hostname], error: null };
+  } else {
+    try {
+      const records = await dns.lookup(hostname, { all: true, verbatim: true });
+      if (!records.length) throw new Error('No DNS address records found');
+      if (records.some(record => !isPublicIp(record.address))) {
+        return { error: 'This hostname resolves to a private or reserved network address and cannot be scanned.' };
+      }
+      dnsCheck = { status: 'resolved', addresses: records.map(record => record.address), error: null };
+      if (isHttps && port === 443) tlsCheck = await connectTls(hostname, records[0].address);
+    } catch (err) {
+      dnsCheck = { status: 'failed', addresses: [], error: err.code === 'ENOTFOUND' ? 'Hostname has no DNS records' : err.message };
+      score += 35;
+      warningSigns.push('DNS lookup failed; the hostname could not be verified and the scan is incomplete.');
+    }
   }
+  if (tlsCheck.status === 'invalid') {
+    score += 35;
+    warningSigns.push(`TLS certificate could not be validated: ${tlsCheck.error}.`);
+  } else if (isHttps && port === 443 && tlsCheck.status === 'unavailable') {
+    warningSigns.push(`TLS certificate check was unavailable: ${tlsCheck.error || 'connection failed'}.`);
+  }
+  if (dnsCheck.status === 'failed' || tlsCheck.status === 'unavailable') score = Math.max(score, 35);
 
   score = Math.min(Math.max(score, 5), 98);
 
@@ -463,7 +508,7 @@ function analyzeUrlHeuristics(inputUrl) {
     recommendations.push('Proceed with vigilance. Double-check the address bar for the exact spelling of the domain.');
     recommendations.push('Never input passwords or financial information on shortened or unverified URLs.');
   } else {
-    recommendations.push('Domain structure appears standard and legitimate.');
+    recommendations.push('No listed URL risk patterns were detected. This is not a reputation check or a guarantee that the site is safe.');
     recommendations.push('Remember: HTTPS only encrypts the transport channel; it does not vouch for the ethics or legitimacy of unknown website owners.');
   }
 
@@ -472,6 +517,8 @@ function analyzeUrlHeuristics(inputUrl) {
     hostname,
     protocol,
     isHttps,
+    dns: dnsCheck,
+    tls: tlsCheck,
     tld,
     riskLevel,
     threatCategory: category,
@@ -674,17 +721,24 @@ function serveStatic(req, res, pathname) {
 // ==========================================
 const server = http.createServer(async (req, res) => {
   // CORS & Security headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const requestOrigin = req.headers.origin;
+  res.setHeader('Vary', 'Origin');
+  if (requestOrigin && allowedOrigins.has(requestOrigin)) res.setHeader('Access-Control-Allow-Origin', requestOrigin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Gemini-Key');
 
   if (req.method === 'OPTIONS') {
+    if (requestOrigin && !allowedOrigins.has(requestOrigin)) {
+      res.writeHead(403);
+      res.end();
+      return;
+    }
     res.writeHead(204);
     res.end();
     return;
   }
 
-  const parsedUrl = url.parse(req.url, true);
+  const parsedUrl = new URL(req.url, 'http://localhost');
   const pathname = parsedUrl.pathname;
 
   // JSON Body Parser helper
@@ -795,7 +849,7 @@ Message to analyze:
           return;
         }
 
-        const result = analyzeUrlHeuristics(inputUrl);
+        const result = await analyzeUrlHeuristics(inputUrl);
         if (result.error) {
           res.writeHead(400);
           res.end(JSON.stringify({ success: false, error: result.error }));

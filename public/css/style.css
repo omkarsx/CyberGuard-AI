@@ -916,6 +916,19 @@ img, svg {
   transition: all var(--transition-fast);
 }
 
+.scanner-error {
+  margin: 10px 0 0;
+  padding: 11px 14px;
+  border: 1px solid rgba(220, 38, 38, 0.22);
+  border-radius: var(--radius-md);
+  background: #FEF2F2;
+  color: #991B1B;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.scanner-error[hidden] { display: none; }
+
 .scanner-footer-row {
   display: flex;
   justify-content: space-between;

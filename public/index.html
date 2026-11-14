@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CyberGuard AI — Detect. Protect. Educate. | JSPM University Pune</title>
   <meta name="description" content="AI-based Cybercrime Detection and Awareness System developed by Department of Electronics and Telecommunication Engineering, JSPM University Pune.">
+  <meta name="cyberguard-api-base-url" content="">
   <link rel="stylesheet" href="css/style.css">
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -536,6 +537,7 @@
               <div class="form-group">
                 <input type="url" id="url-input" class="form-input" aria-label="Website URL to analyze" inputmode="url" autocomplete="url" placeholder="Paste the website URL you want to check (e.g. http://sbi-kyc-update-portal.online/login)">
               </div>
+              <p class="scanner-error" id="url-scanner-error" role="alert" aria-live="polite" hidden></p>
 
               <div class="scanner-footer-row">
                 <span style="font-size: 0.8125rem; color: var(--color-text-muted);">Inspects TLS encryption, TLD abuse, brand spoofing & IP formats</span>
@@ -581,6 +583,8 @@
                       <h5>Transport Protocol:</h5>
                       <span class="badge" id="url-protocol-badge">HTTPS Encrypted</span>
                     </div>
+                    <div class="result-meta-item"><h5>DNS Check:</h5><p id="url-dns-display">Not checked</p></div>
+                    <div class="result-meta-item"><h5>TLS Certificate:</h5><p id="url-tls-display">Not checked</p></div>
                   </div>
 
                   <h5 style="font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; color: var(--color-primary);">Domain Red Flags & Anomaly Audit:</h5>
