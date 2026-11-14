@@ -1,5 +1,5 @@
 import { normalizeHttpUrl } from './url-utils.js';
-import { postJson } from './api-client.js';
+import { apiUrl, postJson } from './api-client.js';
 
 /**
  * CyberGuard AI - Scanner Suite Engine
@@ -220,8 +220,16 @@ function setupUrlScanner(onScanCompleted) {
   const loading = document.getElementById('url-loading');
   const resultCard = document.getElementById('url-result-card');
   const errorBox = document.getElementById('url-scanner-error');
+  const demoNotice = document.getElementById('url-demo-notice');
 
   if (!input) return;
+
+  // Keep the live path when a backend is configured. On the static Pages site,
+  // show that Analyze will use a local demonstration instead.
+  let demoOnly = false;
+  try { apiUrl('/api/scan-url'); }
+  catch (error) { demoOnly = error.message.includes('analysis server URL has not been configured'); }
+  if (demoNotice) demoNotice.hidden = !demoOnly;
 
   clearBtn.addEventListener('click', () => {
     input.value = '';
@@ -258,20 +266,29 @@ function setupUrlScanner(onScanCompleted) {
     loading.classList.add('active');
 
     try {
-      const data = await postJson('/api/scan-url', { url: rawUrl });
+      let result;
+      try {
+        const data = await postJson('/api/scan-url', { url: rawUrl });
+        result = data.result;
+      } catch (error) {
+        if (!error.message.includes('analysis server URL has not been configured')) throw error;
+        // Explicit demo fallback only for the unconfigured static deployment.
+        await new Promise(resolve => setTimeout(resolve, 450));
+        result = analyzeUrlDemo(rawUrl);
+      }
       loading.classList.remove('active');
       analyzeBtn.disabled = false;
 
-      renderUrlResult(data.result);
+      renderUrlResult(result);
       if (typeof onScanCompleted === 'function') {
         onScanCompleted({
-          type: 'URL',
+          type: result.isDemo ? 'URL Demo' : 'URL',
           snippet: rawUrl.length > 55 ? rawUrl.substring(0, 52) + '...' : rawUrl,
-          riskLevel: data.result.riskLevel,
-          score: data.result.riskScore,
-          category: data.result.threatCategory,
+          riskLevel: result.riskLevel,
+          score: result.riskScore,
+          category: result.threatCategory,
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
-          fullResult: data.result
+          fullResult: result
         });
       }
     } catch (err) {
@@ -288,18 +305,22 @@ function renderUrlResult(res) {
   const header = document.getElementById('url-result-header');
 
   header.className = `result-card-header risk-${res.riskLevel.toLowerCase()}`;
-  document.getElementById('url-category-display').textContent = res.threatCategory;
+  document.getElementById('url-category-display').textContent = res.isDemo
+    ? `DEMO ONLY · ${res.threatCategory}` : res.threatCategory;
   document.getElementById('url-scanned-address').textContent = res.url;
   document.getElementById('url-hostname-display').textContent = res.hostname;
   document.getElementById('url-dns-display').textContent = res.dns?.status === 'resolved'
     ? `Resolved (${res.dns.addresses.length} public address${res.dns.addresses.length === 1 ? '' : 'es'})`
-    : res.dns?.status === 'failed' ? 'Lookup failed' : 'Not checked';
+    : res.dns?.status === 'failed' ? 'Lookup failed' : res.isDemo ? 'Not checked (demo)' : 'Not checked';
   document.getElementById('url-tls-display').textContent = res.tls?.status === 'valid'
     ? `Valid${res.tls.validTo ? ` · expires ${new Date(res.tls.validTo).toLocaleDateString()}` : ''}`
-    : res.tls?.status === 'invalid' ? 'Invalid certificate' : res.tls?.status === 'unavailable' ? 'Check unavailable' : 'Not applicable';
+    : res.tls?.status === 'invalid' ? 'Invalid certificate' : res.tls?.status === 'unavailable' ? 'Check unavailable' : res.isDemo ? 'Not checked (demo)' : 'Not applicable';
 
   const protocolBadge = document.getElementById('url-protocol-badge');
-  if (res.isHttps) {
+  if (res.isDemo) {
+    protocolBadge.className = 'badge badge-medium';
+    protocolBadge.textContent = `${res.isHttps ? 'HTTPS' : 'HTTP'} · Not checked`;
+  } else if (res.isHttps) {
     protocolBadge.className = 'badge badge-low';
     protocolBadge.textContent = 'HTTPS Encrypted (TLS)';
   } else {
@@ -317,7 +338,7 @@ function renderUrlResult(res) {
   const warningsList = document.getElementById('url-warnings-list');
   warningsList.innerHTML = (res.identifiedWarningSigns && res.identifiedWarningSigns.length > 0)
     ? res.identifiedWarningSigns.map(w => `<li>${escapeHtml(w)}</li>`).join('')
-    : '<li>No anomalous domain patterns or typosquatting markers detected.</li>';
+    : `<li>${res.isDemo ? 'No demo rule matched. This does not mean the website is safe.' : 'No anomalous domain patterns or typosquatting markers detected.'}</li>`;
 
   const actionsList = document.getElementById('url-actions-list');
   actionsList.innerHTML = res.recommendedSafetyActions.map(a => `<li>${escapeHtml(a)}</li>`).join('');
@@ -326,6 +347,103 @@ function renderUrlResult(res) {
 
   card.classList.add('active');
   card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function analyzeUrlDemo(rawUrl) {
+  const parsed = new URL(rawUrl);
+  const hostname = parsed.hostname.toLowerCase();
+  const labels = hostname.split('.');
+  const mainLabel = labels.length > 1 ? labels.at(-2) : hostname;
+  const domainParts = mainLabel.split(/[^a-z0-9]+/i).filter(Boolean);
+  const warnings = [];
+  let score = 0;
+  let category = 'No demo pattern matched';
+  const suspiciousTlds = new Set(['zip', 'mov', 'click', 'top', 'xyz', 'work', 'support', 'country', 'stream', 'gq', 'tk', 'site', 'online']);
+  const shorteners = new Set(['bit.ly', 'tinyurl.com', 't.co', 'goo.gl', 'ow.ly', 'is.gd']);
+  const brands = [
+    { name: 'Paytm', domain: 'paytm.com', labels: ['paytm'] },
+    { name: 'SBI', domain: 'onlinesbi.sbi', labels: ['sbi', 'onlinesbi'] },
+    { name: 'Google', domain: 'google.com', labels: ['google'] },
+    { name: 'Apple', domain: 'apple.com', labels: ['apple'] },
+    { name: 'Microsoft', domain: 'microsoft.com', labels: ['microsoft'] },
+    { name: 'Amazon', domain: 'amazon.com', labels: ['amazon'] }
+  ];
+  const isOfficial = brand => hostname === brand.domain || hostname.endsWith(`.${brand.domain}`);
+  const brand = brands.find(item => !isOfficial(item) && item.labels.some(token => labels.some(label => label.split(/[^a-z0-9]+/).includes(token))));
+
+  if (parsed.protocol === 'http:') {
+    warnings.push('The pasted URL uses HTTP, so the connection would not be encrypted.');
+    score += 20;
+  }
+  if (/^\d{1,3}(?:\.\d{1,3}){3}$/.test(hostname)) {
+    warnings.push('The URL uses an IP address instead of a domain name.');
+    score += 40;
+  }
+  const tld = labels.at(-1);
+  if (suspiciousTlds.has(tld)) {
+    warnings.push(`The .${tld} ending is included in this demo's caution list.`);
+    score += 25;
+  }
+  if (shorteners.has(hostname)) {
+    warnings.push('This is a URL shortener; the final destination is hidden from this demo.');
+    score += 25;
+  }
+  if (brand) {
+    warnings.push(`The hostname contains the ${brand.name} brand name but is not its listed official domain.`);
+    score += 45;
+    category = 'Possible brand impersonation pattern';
+  } else if (domainParts.length) {
+    const typoBrand = brands.find(item => !isOfficial(item) && item.labels.some(token =>
+      domainParts.some(label => label !== token && demoEditDistance(label, token) === 1)));
+    if (typoBrand) {
+      warnings.push(`A hostname label is one character away from the monitored brand ${typoBrand.name}.`);
+      score += 45;
+      category = 'Possible typosquatting pattern';
+    }
+  }
+  if (/(?:login|signin|verify|update|kyc|claim|reward|bank|otp)/i.test(parsed.pathname + parsed.search)) {
+    warnings.push('The URL path contains a login, verification, payment, or reward keyword.');
+    score += 12;
+  }
+  if (category === 'No demo pattern matched' && score > 0) category = 'Caution pattern detected';
+
+  score = Math.min(score, 98);
+  const riskLevel = score >= 65 ? 'HIGH' : score >= 30 ? 'MEDIUM' : 'LOW';
+  const recommendations = riskLevel === 'HIGH'
+    ? ['DEMO ONLY: Several caution patterns matched. Do not enter sensitive information until checked by a real security service.']
+    : riskLevel === 'MEDIUM'
+      ? ['DEMO ONLY: Review the URL carefully and visit the organization through its official website.']
+      : ['DEMO ONLY: No demo rule matched. This result does not verify the site or establish that it is safe.'];
+
+  return {
+    isDemo: true,
+    url: rawUrl,
+    hostname,
+    protocol: parsed.protocol,
+    isHttps: parsed.protocol === 'https:',
+    dns: { status: 'not_checked', addresses: [] },
+    tls: { status: 'not_checked', authorized: false },
+    riskLevel,
+    threatCategory: category,
+    riskScore: score,
+    identifiedWarningSigns: warnings,
+    recommendedSafetyActions: recommendations,
+    disclaimer: 'DEMONSTRATION ONLY — this result was generated in your browser from simple URL pattern rules. No DNS, TLS, website, or threat-reputation checks were made. It is not a real security scan.'
+  };
+}
+
+function demoEditDistance(left, right) {
+  const row = Array.from({ length: right.length + 1 }, (_, index) => index);
+  for (let i = 1; i <= left.length; i++) {
+    let diagonal = row[0];
+    row[0] = i;
+    for (let j = 1; j <= right.length; j++) {
+      const above = row[j];
+      row[j] = Math.min(row[j] + 1, row[j - 1] + 1, diagonal + (left[i - 1] === right[j - 1] ? 0 : 1));
+      diagonal = above;
+    }
+  }
+  return row[right.length];
 }
 
 // --------------------------------------------------------------------------

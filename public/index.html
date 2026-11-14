@@ -537,10 +537,11 @@
               <div class="form-group">
                 <input type="url" id="url-input" class="form-input" aria-label="Website URL to analyze" inputmode="url" autocomplete="url" placeholder="Paste the website URL you want to check (e.g. http://sbi-kyc-update-portal.online/login)">
               </div>
+              <p class="scanner-demo-notice" id="url-demo-notice" role="note" hidden>Demo mode: paste a URL and choose Analyse URL. Results use local pattern rules only; DNS, TLS, website content, and reputation are not checked.</p>
               <p class="scanner-error" id="url-scanner-error" role="alert" aria-live="polite" hidden></p>
 
               <div class="scanner-footer-row">
-                <span style="font-size: 0.8125rem; color: var(--color-text-muted);">Inspects TLS encryption, TLD abuse, brand spoofing & IP formats</span>
+                <span style="font-size: 0.8125rem; color: var(--color-text-muted);">Demo mode reviews URL patterns only; live DNS and TLS checks need a configured server.</span>
                 <div class="scanner-actions">
                   <button type="button" class="btn btn-secondary" id="clear-url-btn">Clear</button>
                   <button type="button" class="btn btn-primary" id="analyze-url-btn">
@@ -556,8 +557,8 @@
               <!-- Loading State -->
               <div class="scanner-loading" id="url-loading">
                 <div class="loading-radar-ring"></div>
-                <h4 class="loading-stage-text">Parsing domain DNS & SSL infrastructure...</h4>
-                <p class="loading-subtext">Checking Levenshtein brand distance and high-risk TLD registries</p>
+                <h4 class="loading-stage-text">Reviewing the pasted URL...</h4>
+                <p class="loading-subtext">Demo mode checks common domain and path patterns only.</p>
               </div>
 
               <!-- URL Result Card -->
